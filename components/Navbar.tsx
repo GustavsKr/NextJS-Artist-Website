@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Instagram, Youtube, Facebook, Music } from "lucide-react";
 
 export default function Navbar() {
   const navLinks = [
@@ -13,21 +12,11 @@ export default function Navbar() {
   ];
 
   const socialLinks = [
-      {
-          icon: (
-        <Image
-          src="/spotify.svg"
-          alt="Spotify"
-          width={22}
-          height={22}
-          />
-        ),
-        href: "#",
-    },
-    { icon: <Music size={22} />, href: "#" },
-    { icon: <Instagram size={22} />, href: "#" },
-    { icon: <Facebook size={22} />, href: "#" },
-    { icon: <Youtube size={22} />, href: "#" },
+    { src: "/spotify.svg", alt: "Spotify", href: "https://open.spotify.com/artist/2epOrY6QkzNuFOPeBU13nS" },
+    { src: "/applemusic.svg", alt: "Apple Music", href: "https://music.apple.com/us/artist/e%C4%BCzana-%C5%A1aripova/1786692183" },
+    { src: "/instagram.svg", alt: "Instagram", href: "https://www.instagram.com/piterpen_69/" },
+    { src: "/facebook.svg", alt: "Facebook", href: "https://www.facebook.com/profile.php?id=100048763584084" },
+    { src: "/youtube.svg", alt: "YouTube", href: "https://www.youtube.com/@%D0%AD%D0%BB%D1%8C%D0%B7%D0%B0%D0%BD%D0%B0%D0%A8%D0%B0%D1%80%D0%B8%D0%BF%D0%BE%D0%B2%D0%B0" },
   ];
 
   return (
@@ -39,7 +28,7 @@ export default function Navbar() {
           <Link
             key={item.label}
             href={item.href}
-            className="transition-colors duration-200 hover:text-gray-300"
+            className="transition-opacity duration-200 hover:opacity-70"
           >
             {item.label}
           </Link>
@@ -47,7 +36,7 @@ export default function Navbar() {
       </div>
 
       {/* Center title */}
-      <h1 className="text-3xl font-semibold tracking-widest absolute left-1/2 -translate-x-1/2 transition-colors duration-200">
+      <h1 className="text-3xl font-semibold tracking-widest absolute left-1/2 -translate-x-1/2">
         ELZANA SHARIPOVA
       </h1>
 
@@ -58,9 +47,14 @@ export default function Navbar() {
             key={i}
             href={item.href}
             target="_blank"
-            className="transition-colors duration-200 hover:text-gray-300"
+            className="transition-opacity duration-200 hover:opacity-70"
           >
-            {item.icon}
+            <Image
+              src={item.src}
+              alt={item.alt}
+              width={20}
+              height={20}
+            />
           </Link>
         ))}
       </div>
