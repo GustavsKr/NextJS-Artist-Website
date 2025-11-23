@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 1.5s ease-out forwards;
+}
+
+/* Optional: delay for navbar */
+.delay-1000 {
+  animation-delay: 1s;
+}
+
+/* Diagonal bottom for hero section */
+.clip-diagonal-bottom {
+  clip-path: polygon(0 0, 100% 100%, 100% 100%, 0 100%);
+}
