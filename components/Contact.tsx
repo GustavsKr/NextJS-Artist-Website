@@ -1,11 +1,10 @@
 "use client";
 
-export default function Contact() {
+export default function Contact({ id }: { id?: string }) {
   return (
-    <section id="contact" className="relative w-full bg-white text-black py-24">
-
+    <section id={id} className="relative w-full bg-white text-black py-20">
       {/* Top diagonal */}
-      <div className="absolute top-0 w-full h-24 bg-white clip-diagonal-top-alt"></div>
+      <div className="absolute top-0 w-full h-20 bg-white clip-diagonal-top-alt"></div>
 
       <div className="max-w-3xl mx-auto px-6 text-center">
         <h2 className="text-3xl font-bold mb-6">Contact</h2>
@@ -15,10 +14,10 @@ export default function Contact() {
         </p>
 
         <a
-          href="mailto:your-email@example.com"
+          href="mailto:elzana300604@gmail.com"
           className="text-xl font-semibold underline underline-offset-4"
         >
-          your-email@example.com
+          elzana300604@gmail.com
         </a>
       </div>
 

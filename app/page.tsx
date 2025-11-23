@@ -7,7 +7,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="w-full text-white">
+    <main className="w-full text-white overflow-x-hidden">
 
       {/* Hero section */}
       <section className="relative w-full h-[117vh] overflow-hidden bg-black">
@@ -30,14 +30,14 @@ export default function Home() {
         </div>
 
         {/* Diagonal at bottom */}
-        <div className="absolute bottom-0 w-full h-15 bg-gray-50 clip-diagonal-bottom-left"></div>
+        <div className="absolute bottom-0 w-full h-15 bg-neutral-900 clip-diagonal-bottom-left"></div>
       </section>
 
-      <Biography />
+      <Biography id="about" />
       
-      <MediaShowcase />
+      <MediaShowcase id="videos" />
 
-      <Contact />
+      <Contact id="contact"/>
       
       <Footer />
     </main>
