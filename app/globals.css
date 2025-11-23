@@ -11,8 +11,8 @@
 }
 
 /* Optional: delay for navbar */
-.delay-1000 {
-  animation-delay: 1s;
+.delay-500 {
+  animation-delay: 0.5s;
 }
 
 /* Diagonal bottom for hero section */
