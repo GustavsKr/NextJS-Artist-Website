@@ -1,6 +1,8 @@
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import Biography from "@/components/Biography";
+import MediaShowcase from "@/components/MediaShowcase";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
 import Image from "next/image";
 
 export default function Home() {
@@ -28,13 +30,15 @@ export default function Home() {
         </div>
 
         {/* Diagonal at bottom */}
-        <div className="absolute bottom-0 w-full h-15 bg-gray-50 clip-diagonal-bottom"></div>
+        <div className="absolute bottom-0 w-full h-15 bg-gray-50 clip-diagonal-bottom-left"></div>
       </section>
 
-      {/* Biography section */}
       <Biography />
+      
+      <MediaShowcase />
 
-      {/* Footer */}
+      <Contact />
+      
       <Footer />
     </main>
   );

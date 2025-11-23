@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 export default function Biography() {
   return (
     <section className="relative w-full bg-gray-50">
-      <div className="max-w-6xl mx-auto px-6 py-16 flex flex-col md:flex-row items-center gap-8">
+      <div className="max-w-6xl mx-auto px-6 py-16 pb-40 flex flex-col md:flex-row items-center gap-8">
         {/* Left: Album image */}
         <div className="w-full md:w-1/2 flex justify-center">
           <Image
@@ -35,6 +35,9 @@ export default function Biography() {
           </p>
         </motion.div>
       </div>
+      
+      {/* Bottom diagonal */}
+      <div className="absolute bottom-0 left-0 w-full h-20 bg-[#eaeaea] clip-diagonal-right"></div>
     </section>
   );
 }

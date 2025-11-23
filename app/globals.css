@@ -16,6 +16,12 @@
 }
 
 /* Diagonal bottom for hero section */
-.clip-diagonal-bottom {
-  clip-path: polygon(0 0, 100% 100%, 100% 100%, 0 100%);
+.clip-diagonal-bottom-left {
+  clip-path: polygon(0 0, 100% 40%, 100% 110%, 0 110%);
 }
+
+.clip-diagonal-right {
+  clip-path: polygon(0 40%, 100% 0, 100% 100%, 0 100%);
+}
+
+
