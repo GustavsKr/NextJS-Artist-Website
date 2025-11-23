@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function Biography({ id }: { id?: string }) {
   return (
-    <section id={id} className="relative w-full bg-neutral-900">
+    <section id={id} className="relative w-full bg-neutral-900 scroll-mt-[120]">
       <div className="max-w-6xl mx-auto px-6 py-16 pb-40 flex flex-col md:flex-row items-center gap-8">
         {/* Left: Spotify album embed */}
         <div className="w-full md:w-1/2 flex justify-center">

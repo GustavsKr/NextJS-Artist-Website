@@ -2,7 +2,7 @@
 
 export default function Contact({ id }: { id?: string }) {
   return (
-    <section id={id} className="relative w-full bg-white text-black py-20">
+    <section id={id} className="relative w-full bg-white text-black py-20 scroll-mt-40">
       {/* Top diagonal */}
       <div className="absolute top-0 w-full h-20 bg-white clip-diagonal-top-alt"></div>
 

@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function Navbar() {
   const navLinks = [
     { label: "About", href: "#about" },
-    { label: "Videos", href: "#videos" },
+    { label: "Gallery", href: "#videos" },
     { label: "Contact", href: "#contact" },
   ];
 
@@ -17,25 +17,16 @@ export default function Navbar() {
     { src: "/svg/youtube.svg", alt: "YouTube", href: "https://www.youtube.com/@%D0%AD%D0%BB%D1%8C%D0%B7%D0%B0%D0%BD%D0%B0%D0%A8%D0%B0%D1%80%D0%B8%D0%BF%D0%BE%D0%B2%D0%B0" },
   ];
 
-  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
-
   return (
-    <nav className="absolute top-0 left-0 w-full py-4 px-4 sm:px-16 text-white z-20">
+    <nav className="absolute top-0 left-0 w-full py-10 px-8 sm:px-16 text-white z-20">
       <div className="relative w-full flex items-center justify-between">
 
-        {/* Left nav links (hidden on small screens) */}
-        <div className="hidden md:flex gap-8">
+        {/* Left nav links (desktop only) */}
+        <div className="hidden md:flex gap-8 z-10">
           {navLinks.map((item) => (
             <a
               key={item.label}
-              href={item.href}
-              onClick={(e) => handleScroll(e, item.href)}
+              href={item.href}     // ← no onClick at all
               className="transition-opacity duration-200 hover:opacity-70 cursor-pointer"
             >
               {item.label}
@@ -44,14 +35,13 @@ export default function Navbar() {
         </div>
 
         {/* Center title */}
-        <h1 className="absolute left-1/2 transform -translate-x-1/2 text-center text-2xl sm:text-3xl font-semibold tracking-widest top-4 sm:top-1/2 sm:-translate-y-1/2">
-          <span className="block sm:inline">ELZANA</span>
+        <h1 className="absolute left-1/2 -translate-x-1/2 text-center text-2xl sm:text-3xl font-semibold tracking-widest top-4 sm:top-1/2 sm:-translate-y-1/2 z-0">
+          <span className="block sm:inline">ELZANA </span>
           <span className="block sm:inline">SHARIPOVA</span>
         </h1>
 
-
-        {/* Right social icons (hidden on small screens) */}
-        <div className="hidden md:flex gap-5">
+        {/* Social icons (desktop only) */}
+        <div className="hidden md:flex gap-5 z-10">
           {socialLinks.map((item, i) => (
             <a
               key={i}
@@ -66,6 +56,5 @@ export default function Navbar() {
 
       </div>
     </nav>
-
   );
 }

@@ -64,7 +64,7 @@ export default function MediaShowcase({ id }: { id?: string }) {
   const displayedItems = showAll ? mediaItems : mediaItems.slice(0, 6);
 
   return (
-    <section id={id} className="relative w-full bg-[#eaeaea] text-black py-20">
+    <section id={id} className="relative w-full bg-[#eaeaea] text-black py-20 scroll-mt-40">
       <div className="max-w-6xl mx-auto px-6 pb-12">
         <h2 className="text-3xl font-bold mb-10">Performances & Compositions</h2>
 
@@ -80,7 +80,7 @@ export default function MediaShowcase({ id }: { id?: string }) {
                 transition={{ duration: 0.3 }}
               >
                 {item.type === "video" && (
-                  <div className="aspect-video bg-black rounded-lg overflow-hidden shadow-lg">
+                  <div className="aspect-video bg-black rounded-lg shadow-lg">
                     <iframe
                       src={item.src}
                       className="w-full h-full"
@@ -89,7 +89,7 @@ export default function MediaShowcase({ id }: { id?: string }) {
                   </div>
                 )}
                 {item.type === "photo" && (
-                  <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
+                  <div className="relative w-full aspect-video rounded-lg shadow-lg">
                     <Image
                       src={item.src}
                       alt={item.caption}
@@ -99,7 +99,7 @@ export default function MediaShowcase({ id }: { id?: string }) {
                   </div>
                 )}
                 {item.type === "spotify" && (
-                  <div className="aspect-video rounded-lg overflow-hidden shadow-lg">
+                  <div className="aspect-video rounded-lg shadow-lg">
                     <iframe
                       src={item.src}
                       className="w-full h-full"
