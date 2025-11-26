@@ -4,6 +4,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
+
 interface Photo {
   src: string;
   alt: string;

@@ -2,7 +2,7 @@
 import fs from "fs";
 import path from "path";
 import GalleryClient from "./GalleryClient";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbar"; 
 
 export default function GalleryServer() {
   const galleryDir = path.join(process.cwd(), "public/gallery");
