@@ -1,10 +1,8 @@
 "use client";
 
-export default function Contact({ id }: { id?: string }) {
+export default function Contact() {
   return (
-    <section id={id} className="relative w-full bg-white text-black py-20 scroll-mt-40">
-      {/* Top diagonal */}
-      <div className="absolute top-0 w-full h-20 bg-white clip-diagonal-top-alt"></div>
+    <section className="relative w-full bg-[#eaeaea] text-black py-20 scroll-mt-40">
 
       <div className="max-w-3xl mx-auto px-6 text-center">
         <h2 className="text-3xl font-bold mb-6">Contact</h2>

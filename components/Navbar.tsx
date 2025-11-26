@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link"
 
 export default function Navbar() {
   const navLinks = [
     { label: "About", href: "#about" },
-    { label: "Gallery", href: "#videos" },
+    { label: "Gallery", href: "gallery" },
     { label: "Contact", href: "#contact" },
   ];
 
@@ -35,10 +36,15 @@ export default function Navbar() {
         </div>
 
         {/* Center title */}
-        <h1 className="absolute left-1/2 -translate-x-1/2 text-center text-2xl sm:text-3xl font-semibold tracking-widest top-4 sm:top-1/2 sm:-translate-y-1/2 z-0">
+        <Link
+          href="/"
+          className="absolute left-1/2 -translate-x-1/2 text-center text-2xl sm:text-3xl 
+                    font-semibold tracking-widest top-4 sm:top-1/2 sm:-translate-y-1/2 
+                    z-0 cursor-pointer"
+        >
           <span className="block sm:inline">ELZANA </span>
           <span className="block sm:inline">SHARIPOVA</span>
-        </h1>
+        </Link>
 
         {/* Social icons (desktop only) */}
         <div className="hidden md:flex gap-5 z-10">

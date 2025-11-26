@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Roboto_Slab } from "next/font/google";
 import "./globals.css";
+import Footer from "@/components/Footer"; // ⬅ adjust the path
 
-const montserrat = Montserrat({
+const montserrat = Roboto_Slab({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"], // normal to bold
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -15,7 +16,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={montserrat.className}>{children}</body>
+      <body className={montserrat.className}>
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

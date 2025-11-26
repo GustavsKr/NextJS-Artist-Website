@@ -10,7 +10,7 @@ interface MediaItem {
   caption: string;
 }
 
-export default function MediaShowcase({ id }: { id?: string }) {
+export default function MediaShowcase() {
   const [showAll, setShowAll] = useState(false);
 
   const mediaItems: MediaItem[] = [
@@ -64,7 +64,7 @@ export default function MediaShowcase({ id }: { id?: string }) {
   const displayedItems = showAll ? mediaItems : mediaItems.slice(0, 6);
 
   return (
-    <section id={id} className="relative w-full bg-[#eaeaea] text-black py-20 scroll-mt-40">
+    <section className="relative w-full bg-neutral-900 text-white py-20 scroll-mt-40">
       <div className="max-w-6xl mx-auto px-6 pb-12">
         <h2 className="text-3xl font-bold mb-10">Performances & Compositions</h2>
 
