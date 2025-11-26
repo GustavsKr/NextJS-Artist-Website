@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-export default function Newest() {
+export default function News() {
   return (
     <section className="relative w-full bg-[#eaeaea] scroll-mt-[120]">
       <div className="max-w-6xl mx-auto px-6 py-16 pb-40 flex flex-col md:flex-row items-center gap-8">
@@ -60,7 +60,7 @@ export default function Newest() {
               select-none
             "
           >
-            Listen To The Album
+            Listen Now
           </a>
         </motion.div>
 

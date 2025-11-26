@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import Newest from "@/components/Newest";
+import News from "@/components/News";
 import MediaShowcase from "@/components/MediaShowcase";
 import Contact from "@/components/Contact";
 import Image from "next/image";
@@ -32,7 +32,7 @@ export default function Home() {
         <div className="absolute bottom-0 w-full h-15 bg-[#eaeaea] clip-diagonal-bottom-left"></div>
       </section>
 
-      <Newest />
+      <News />
       
       <MediaShowcase />
 

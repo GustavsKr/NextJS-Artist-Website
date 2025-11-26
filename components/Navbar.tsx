@@ -5,9 +5,9 @@ import Link from "next/link"
 
 export default function Navbar() {
   const navLinks = [
-    { label: "About", href: "#about" },
-    { label: "Gallery", href: "gallery" },
-    { label: "Contact", href: "#contact" },
+    { label: "About", href: "/about" },
+    { label: "Performances", href: "/performances" },
+    { label: "Gallery", href: "/gallery" },
   ];
 
   const socialLinks = [
