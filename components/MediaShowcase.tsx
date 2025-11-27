@@ -26,9 +26,17 @@ export default function MediaShowcase() {
   ];
 
   return (
-    <section className="relative w-full bg-neutral-900 text-white py-20 scroll-mt-40">
+    <section className="relative w-full bg-[#111] text-white py-20 scroll-mt-40">
       <div className="max-w-4xl mx-auto px-6 pb-12">
-        <h2 className="text-3xl font-bold mb-10 text-center">Performances & Compositions</h2>
+        <motion.h2
+          className="text-3xl font-bold mb-10 text-center"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{ duration: 0.8}}
+        >
+          Performances & Compositions
+        </motion.h2>
 
         <div className="flex flex-col gap-12">
           {mediaItems.map((item, index) => (
@@ -63,7 +71,7 @@ export default function MediaShowcase() {
         <div className="flex justify-center mt-12">
           <Link
             href="/performances"
-            className="inline-block px-6 py-3 border border-white text-white bg-neutral-900 font-semibold transition-all duration-300 hover:bg-white hover:text-black hover:scale-[1.03] hover:shadow-[0_0_15px_rgba(0,0,0,0.6)] select-none"
+            className="inline-block px-6 py-3 border border-white text-white bg-[#111] font-semibold transition-all duration-300 hover:bg-white hover:text-black hover:scale-[1.03] hover:shadow-[0_0_15px_rgba(0,0,0,0.6)] select-none"
           >
             View More Performances
           </Link>

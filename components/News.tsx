@@ -67,7 +67,7 @@ export default function News() {
       </div>
 
       {/* Bottom diagonal */}
-      <div className="absolute bottom-0 left-0 w-full h-20 bg-neutral-900 clip-diagonal-right"></div>
+      <div className="absolute bottom-0 left-0 w-full h-20 bg-[#111] clip-diagonal-right"></div>
     </section>
   );
 }

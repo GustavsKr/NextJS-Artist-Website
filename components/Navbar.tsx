@@ -14,24 +14,29 @@ export default function Navbar() {
     { label: "Gallery", href: "/gallery" },
   ];
 
-  // Disable body scroll when menu is open
+  // Lock scroll when menu is open
   useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
   }, [menuOpen]);
 
+  // Close menu on Escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, []);
+
   return (
-    <nav className="w-full text-white z-40 px-6 sm:px-12">
+    <nav className="w-full text-white z-40 px-6 sm:px-12 md:pt-5 xl:pt-1">
       <div className="flex items-center justify-between py-10 relative">
-        {/* LEFT: Hamburger / Desktop nav */}
+        {/* LEFT: Hamburger / Desktop Nav */}
         <div className="flex items-center gap-6 xl:gap-10">
-          {/* Hamburger / Menu SVG */}
+          {/* Hamburger */}
           <button
             className="xl:hidden relative z-50"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -42,10 +47,9 @@ export default function Navbar() {
               height="36"
               viewBox="0 0 24 24"
               fill="none"
-              xmlns="http://www.w3.org/2000/svg"
               animate={{ rotate: menuOpen ? 180 : 0 }}
               transition={{ duration: 0.2, ease: "easeInOut" }}
-              className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 xl:w-14 xl:h-14"
+              className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 xl:w-14 xl:h-14"
             >
               <rect x="3" y="5" width="18" height="2" rx="1" fill="currentColor" />
               <rect x="3" y="11" width="18" height="2" rx="1" fill="currentColor" />
@@ -54,12 +58,12 @@ export default function Navbar() {
           </button>
 
           {/* Desktop nav links */}
-          <div className="hidden xl:flex gap-10 2xl:text-l">
+          <div className="hidden xl:flex gap-10 text-lg">
             {navLinks.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
-                className="transition-opacity duration-200 hover:opacity-70 cursor-pointer"
+                className="transition-opacity duration-200 hover:opacity-70"
               >
                 {item.label}
               </Link>
@@ -71,17 +75,14 @@ export default function Navbar() {
         <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center">
           <Link
             href="/"
-            className="text-2xl pt-0 sm:text-3xl md:text-4xl xl:text-4xl 2xl:text-4xl font-semibold tracking-widest text-center
-                       [@media(min-width:1024px) and (max-width:1366px)]:text-[5.5rem]"
+            className="text-2xl pt-0 sm:text-3xl md:text-4xl xl:text-4xl 2xl:text-4xl font-semibold tracking-widest text-center"
           >
             <span className="block sm:inline">ELZANA </span>
             <span className="block sm:inline">SHARIPOVA</span>
           </Link>
 
-          {/* Social icons for mobile/tablet under title */}
-          <div className="xl:hidden mt-3
-                          [@media(min-width:1024px) and (max-width:1366px)]:mt-5
-                          [@media(min-width:1024px) and (max-width:1366px)]:gap-7">
+          {/* Mobile/Tablet social icons */}
+          <div className="xl:hidden mt-3 md:mt-5 md:gap-7">
             <SocialLinks size={24} className="flex gap-5" />
           </div>
         </div>
@@ -92,29 +93,45 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Fullscreen mobile/tablet menu */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="fixed inset-0 bg-black/90 z-30 flex flex-col items-center justify-center text-3xl gap-12"
-            initial={{ opacity: 0, y: -100 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -100 }}
+            className="fixed inset-0 z-30"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.25, ease: "easeInOut" }}
           >
-            {navLinks.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                onClick={() => setMenuOpen(false)}
-                className="hover:opacity-70 transition-opacity duration-200"
-              >
-                {item.label}
-              </Link>
-            ))}
+            {/* Background overlay */}
+            <div
+              className="absolute inset-0 bg-black/90"
+              onClick={() => setMenuOpen(false)}
+            />
+
+            {/* Centered menu links */}
+            <motion.div
+              className="relative z-40 flex flex-col items-center justify-center min-h-screen gap-12 pointer-events-none"
+              initial={{ y: -100 }}
+              animate={{ y: 0 }}
+              exit={{ y: -100 }}
+              transition={{ duration: 0.25, ease: "easeInOut" }}
+            >
+              {navLinks.map((item) => (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="text-3xl hover:opacity-70 transition-opacity duration-200 pointer-events-auto"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
+
     </nav>
   );
 }

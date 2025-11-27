@@ -3,6 +3,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Navbar from "@/components/Navbar"; 
 
 
 interface Photo {
@@ -12,10 +13,19 @@ interface Photo {
 
 export default function GalleryClient({ photos }: { photos: Photo[] }) {
   return (
-    <section className="w-full py-45 bg-[#111] text-white">
+    <section className="w-full bg-[#111] text-white">
+      <Navbar />
       {/* Masonry container */}
-      <div className="max-w-7xl mx-auto columns-1 sm:columns-2 gap-25">
-        {photos.map((photo, index) => (
+      <div
+        className="
+          max-w-7xl mx-auto 
+          columns-1 lg:columns-2 
+          gap-25
+          py-24 
+          px-6 lg:px-0
+        "
+      >        
+      {photos.map((photo, index) => (
           <motion.div
             key={index}
             className="mb-25 break-inside-avoid"

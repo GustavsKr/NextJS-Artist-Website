@@ -35,9 +35,9 @@ const mediaItems: MediaItem[] = [
 export default function PerformancesPage() {
   return (
     <>
-      <Navbar />
-      <main className="w-full bg-neutral-900 text-white py-45">
-        <div className="max-w-4xl mx-auto px-6 pb-12">
+      <main className="w-full bg-[#111] text-white">
+        <Navbar />
+        <div className="max-w-4xl mx-auto px-6 pb-12 py-24">
 
           <div className="flex flex-col gap-12">
             {mediaItems.map((item, index) => (
