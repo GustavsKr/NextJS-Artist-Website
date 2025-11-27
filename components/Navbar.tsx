@@ -1,21 +1,13 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link"
+import Link from "next/link";
+import SocialLinks from "./SocialLinks";
 
 export default function Navbar() {
   const navLinks = [
     { label: "About", href: "/about" },
     { label: "Performances", href: "/performances" },
     { label: "Gallery", href: "/gallery" },
-  ];
-
-  const socialLinks = [
-    { src: "/svg/spotify.svg", alt: "Spotify", href: "https://open.spotify.com/artist/2epOrY6QkzNuFOPeBU13nS" },
-    { src: "/svg/applemusic.svg", alt: "Apple Music", href: "https://music.apple.com/us/artist/e%C4%BCzana-%C5%A1aripova/1786692183" },
-    { src: "/svg/instagram.svg", alt: "Instagram", href: "https://www.instagram.com/piterpen_69/" },
-    { src: "/svg/facebook.svg", alt: "Facebook", href: "https://www.facebook.com/profile.php?id=100048763584084" },
-    { src: "/svg/youtube.svg", alt: "YouTube", href: "https://www.youtube.com/@%D0%AD%D0%BB%D1%8C%D0%B7%D0%B0%D0%BD%D0%B0%D0%A8%D0%B0%D1%80%D0%B8%D0%BF%D0%BE%D0%B2%D0%B0" },
   ];
 
   return (
@@ -25,13 +17,13 @@ export default function Navbar() {
         {/* Left nav links (desktop only) */}
         <div className="hidden md:flex gap-8 z-10">
           {navLinks.map((item) => (
-            <a
+            <Link
               key={item.label}
-              href={item.href}     // ← no onClick at all
+              href={item.href}
               className="transition-opacity duration-200 hover:opacity-70 cursor-pointer"
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -47,18 +39,7 @@ export default function Navbar() {
         </Link>
 
         {/* Social icons (desktop only) */}
-        <div className="hidden md:flex gap-5 z-10">
-          {socialLinks.map((item, i) => (
-            <a
-              key={i}
-              href={item.href}
-              target="_blank"
-              className="transition-opacity duration-200 hover:opacity-70"
-            >
-              <Image src={item.src} alt={item.alt} width={20} height={20} />
-            </a>
-          ))}
-        </div>
+        <SocialLinks size={20} className="hidden md:flex gap-5 z-10" />
 
       </div>
     </nav>
