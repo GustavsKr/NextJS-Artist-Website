@@ -54,7 +54,7 @@ export default function Navbar() {
           </button>
 
           {/* Desktop nav links */}
-          <div className="hidden xl:flex gap-10">
+          <div className="hidden xl:flex gap-10 2xl:text-l">
             {navLinks.map((item) => (
               <Link
                 key={item.label}
@@ -71,7 +71,7 @@ export default function Navbar() {
         <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center">
           <Link
             href="/"
-            className="text-2xl sm:text-3xl md:text-4xl xl:text-5xl 2xl:text-6xl font-semibold tracking-widest text-center
+            className="text-2xl pt-0 sm:text-3xl md:text-4xl xl:text-4xl 2xl:text-4xl font-semibold tracking-widest text-center
                        [@media(min-width:1024px) and (max-width:1366px)]:text-[5.5rem]"
           >
             <span className="block sm:inline">ELZANA </span>
@@ -88,7 +88,7 @@ export default function Navbar() {
 
         {/* RIGHT: Desktop social icons */}
         <div className="hidden xl:flex gap-5 z-20">
-          <SocialLinks size={20} className="flex gap-5 transition-opacity duration-200 hover:opacity-70" />
+          <SocialLinks size={22} className="flex gap-6" />
         </div>
       </div>
 
