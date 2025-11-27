@@ -1,6 +1,11 @@
 // app/performances/page.tsx
 import Navbar from "@/components/Navbar";
 
+export const metadata = {
+  title: "Performances - Elzana Sharipova", 
+  description: "Collection of video performances by pianist and composer Elzana Sharipova",
+};
+
 interface MediaItem {
   src: string;
   caption: string;

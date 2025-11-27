@@ -4,6 +4,11 @@ import path from "path";
 import GalleryClient from "./GalleryClient";
 import Navbar from "@/components/Navbar"; 
 
+export const metadata = {
+  title: "Gallery - Elzana Sharipova", 
+  description: "Photo gallery of pianist and composer Elzana Sharipova",
+};
+
 export default function GalleryServer() {
   const galleryDir = path.join(process.cwd(), "public/gallery");
   let files = fs.readdirSync(galleryDir);

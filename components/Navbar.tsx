@@ -1,47 +1,120 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import SocialLinks from "./SocialLinks";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const navLinks = [
     { label: "About", href: "/about" },
     { label: "Performances", href: "/performances" },
     { label: "Gallery", href: "/gallery" },
   ];
 
-  return (
-    <nav className="absolute top-0 left-0 w-full py-10 px-8 sm:px-16 text-white z-20">
-      <div className="relative w-full flex items-center justify-between">
+  // Disable body scroll when menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
 
-        {/* Left nav links (desktop only) */}
-        <div className="hidden md:flex gap-8 z-10">
-          {navLinks.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className="transition-opacity duration-200 hover:opacity-70 cursor-pointer"
+  return (
+    <nav className="w-full text-white z-40 px-6 sm:px-12">
+      <div className="flex items-center justify-between py-10 relative">
+        {/* LEFT: Hamburger / Desktop nav */}
+        <div className="flex items-center gap-6 xl:gap-10">
+          {/* Hamburger / Menu SVG */}
+          <button
+            className="xl:hidden relative z-50"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+          >
+            <motion.svg
+              width="36"
+              height="36"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              animate={{ rotate: menuOpen ? 180 : 0 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
+              className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 xl:w-14 xl:h-14"
             >
-              {item.label}
-            </Link>
-          ))}
+              <rect x="3" y="5" width="18" height="2" rx="1" fill="currentColor" />
+              <rect x="3" y="11" width="18" height="2" rx="1" fill="currentColor" />
+              <rect x="3" y="17" width="18" height="2" rx="1" fill="currentColor" />
+            </motion.svg>
+          </button>
+
+          {/* Desktop nav links */}
+          <div className="hidden xl:flex gap-10">
+            {navLinks.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="transition-opacity duration-200 hover:opacity-70 cursor-pointer"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
         </div>
 
-        {/* Center title */}
-        <Link
-          href="/"
-          className="absolute left-1/2 -translate-x-1/2 text-center text-2xl sm:text-3xl 
-                    font-semibold tracking-widest top-4 sm:top-1/2 sm:-translate-y-1/2 
-                    z-0 cursor-pointer"
-        >
-          <span className="block sm:inline">ELZANA </span>
-          <span className="block sm:inline">SHARIPOVA</span>
-        </Link>
+        {/* CENTER: Title */}
+        <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center">
+          <Link
+            href="/"
+            className="text-2xl sm:text-3xl md:text-4xl xl:text-5xl 2xl:text-6xl font-semibold tracking-widest text-center
+                       [@media(min-width:1024px) and (max-width:1366px)]:text-[5.5rem]"
+          >
+            <span className="block sm:inline">ELZANA </span>
+            <span className="block sm:inline">SHARIPOVA</span>
+          </Link>
 
-        {/* Social icons (desktop only) */}
-        <SocialLinks size={20} className="hidden md:flex gap-5 z-10" />
+          {/* Social icons for mobile/tablet under title */}
+          <div className="xl:hidden mt-3
+                          [@media(min-width:1024px) and (max-width:1366px)]:mt-5
+                          [@media(min-width:1024px) and (max-width:1366px)]:gap-7">
+            <SocialLinks size={24} className="flex gap-5" />
+          </div>
+        </div>
 
+        {/* RIGHT: Desktop social icons */}
+        <div className="hidden xl:flex gap-5 z-20">
+          <SocialLinks size={20} className="flex gap-5 transition-opacity duration-200 hover:opacity-70" />
+        </div>
       </div>
+
+      {/* Fullscreen mobile/tablet menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            className="fixed inset-0 bg-black/90 z-30 flex flex-col items-center justify-center text-3xl gap-12"
+            initial={{ opacity: 0, y: -100 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -100 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+          >
+            {navLinks.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                onClick={() => setMenuOpen(false)}
+                className="hover:opacity-70 transition-opacity duration-200"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
