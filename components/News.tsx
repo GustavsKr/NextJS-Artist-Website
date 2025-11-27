@@ -66,8 +66,15 @@ export default function News() {
 
       </div>
 
-      {/* Bottom diagonal */}
-      <div className="absolute bottom-0 left-0 w-full h-20 bg-[#111] clip-diagonal-right"></div>
+      <svg
+        className="absolute -bottom-1 w-full h-20 z-10"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+      >
+        <polygon points="0,40 100,0 100,100 0,100" fill="#111" />
+      </svg>
+
+
     </section>
   );
 }

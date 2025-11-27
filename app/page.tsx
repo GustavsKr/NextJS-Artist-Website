@@ -9,34 +9,41 @@ export default function Home() {
     <main className="w-full text-white overflow-x-hidden">
 
       {/* Hero section */}
-      <section className="relative w-full h-[117vh] bg-black">
-        {/* Hero image */}
-        <Image
-          src="/hero.jpg"
-          alt="Elzana Sharipova"
-          fill
-          className="object-cover animate-fadeIn"
-          priority
-        />
+<section className="relative w-full h-[117vh] bg-black">
+  {/* Hero image */}
+  <Image
+    src="/hero.jpg"
+    alt="Elzana Sharipova"
+    fill
+    className="object-cover animate-fadeIn"
+    priority
+  />
 
-        {/* Gradient + Navbar wrapper to fade in together */}
-        <div className="absolute top-0 left-0 w-full z-20 opacity-0 animate-fadeIn delay-500">
-          {/* Top dark gradient */}
-          <div className="absolute top-0 left-0 w-full h-60 bg-linear-to-b from-black/90 to-transparent"></div>
-          
-          {/* Navbar */}
-          <Navbar />
-        </div>
+  {/* Gradient + Navbar wrapper */}
+  <div className="absolute top-0 left-0 w-full z-20 opacity-0 animate-fadeIn delay-500">
+    <div className="absolute top-0 left-0 w-full h-60 bg-linear-to-b from-black/90 to-transparent"></div>
+    <Navbar />
+  </div>
 
-        {/* Diagonal at bottom */}
-        <div className="absolute bottom-0 w-full h-15 bg-[#eaeaea] clip-diagonal-bottom-left"></div>
-      </section>
+  {/* Diagonal SVG at bottom */}
+<svg
+  className="absolute -bottom-2 w-full h-20 z-10"
+  viewBox="0 0 100 100"
+  preserveAspectRatio="none"
+>
+  <polygon points="0,0 100,50 100,100 0,100" fill="#eaeaea" />
+</svg>
 
-      <News />
-      
-      <MediaShowcase />
 
-      <Contact />
+</section>
+
+{/* Next section background matches SVG */}
+<section className="bg-[#eaeaea]">
+  <News />
+  <MediaShowcase />
+  <Contact />
+</section>
+
     </main>
   );
 }
