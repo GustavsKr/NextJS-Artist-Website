@@ -1,11 +1,9 @@
 @import "tailwindcss";
 
-
 html, body {
   overflow-x: hidden;
   width: 100%;
 }
-
 
 /* Fade-in animation */
 @keyframes fadeIn {
