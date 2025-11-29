@@ -31,7 +31,7 @@ export default function AdminLoginPage() {
       setLoading(false);
 
       if (res.ok) {
-        router.push('/admin/galleries'); // redirect after successful login
+        router.push('/admin/panel'); // redirect after successful login
         router.refresh(); // ensure middleware sees session
       } else {
         setError(json.error || 'Invalid credentials');

@@ -10,7 +10,7 @@ type Photo = {
   url: string;
 };
 
-export default function AdminGalleriesPage() {
+export default function AdminPanel() {
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [file, setFile] = useState<File | null>(null);
   const [title, setTitle] = useState('');
@@ -44,12 +44,12 @@ export default function AdminGalleriesPage() {
 
     const fileName = `photo-${Date.now()}-${file.name}`;
     const { error: uploadError } = await supabase.storage
-      .from('galleries')
+      .from('gallery')
       .upload(fileName, file);
 
     if (uploadError) return alert(uploadError.message);
 
-    const url = supabase.storage.from('galleries').getPublicUrl(fileName).data.publicUrl;
+    const url = supabase.storage.from('gallery').getPublicUrl(fileName).data.publicUrl;
 
     await supabase.from('photos').insert([{ title, url }]);
 
@@ -64,7 +64,7 @@ export default function AdminGalleriesPage() {
   // Delete photo
   const deletePhoto = async (id: string, filePath: string) => {
     await supabase.from('photos').delete().eq('id', id);
-    await supabase.storage.from('galleries').remove([filePath]);
+    await supabase.storage.from('gallery').remove([filePath]);
 
     setPhotos(prev => prev.filter(photo => photo.id !== id));
   };
