@@ -1,14 +1,8 @@
 'use client';
 
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
 import Image from 'next/image';
-import { createClient } from '@supabase/supabase-js';
-
-// Initialize Supabase client (same as in AdminPanel)
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+import { supabase } from '@/lib/supabaseClient';
 
 type Props = {
   files: string[];
@@ -25,78 +19,79 @@ export default function FileUploadDropzone({
   multiple = false,
   fixedFilename,
 }: Props) {
-  const [uploading, setUploading] = useState(false);
+
+  // Check if user is authorized
+  const checkAuth = async () => {
+    const { data: { session }, error } = await supabase.auth.getSession();
+    if (!session || error) {
+      window.location.reload(); // proxy.ts will redirect to login
+      return false;
+    }
+    return true;
+  };
 
   const handleUpload = async (file: File) => {
-    try {
-      setUploading(true);
+    const authorized = await checkAuth();
+    if (!authorized) return;
 
-      let storagePath = '';
+    let storagePath = '';
+    let fileToUpload: File | Blob = file;
 
-      if (folder === '/' && fixedFilename) {
-        // Rename file to fixed filename
-        const base = fixedFilename.replace(/\.jpe?g$/i, '');
-        const newFilename = `${base}.jpg`;
-        const renamedFile = new File([file], newFilename, { type: file.type });
-        file = renamedFile;
-        storagePath = newFilename;
-      } else if (folder === 'gallery') {
-        storagePath = `gallery/${Date.now()}-${file.name}`;
-      } else {
-        storagePath = `${Date.now()}-${file.name}`;
-      }
+    if (folder === '/' && fixedFilename) {
+      // Always replace with the fixed filename
+      const base = fixedFilename.replace(/\.jpe?g$/i, '');
+      const newFilename = `${base}.jpg`;
 
-      // Upload to Supabase Storage
-      const { error } = await supabase.storage
-        .from('artist')
-        .upload(storagePath, file, { upsert: true });
+      // Convert to Blob to ensure correct MIME type
+      fileToUpload = new Blob([file], { type: 'image/jpeg' });
+      storagePath = newFilename;
+    } else if (folder === 'gallery') {
+      storagePath = `gallery/${Date.now()}-${file.name}`;
+    } else {
+      storagePath = `${Date.now()}-${file.name}`;
+    }
 
-      if (error) {
-        console.error('Upload failed:', error);
-        alert('Upload failed: ' + error.message);
-        return;
-      }
+    // Upload using Supabase Storage v2
+    const { error } = await supabase.storage
+      .from('artist')
+      .upload(storagePath, fileToUpload, { upsert: true });
 
-      // Get public URL
-      const { data: urlData } = supabase.storage.from('artist').getPublicUrl(storagePath);
-      if (!urlData?.publicUrl) {
-        alert('Could not get public URL for uploaded file.');
-        return;
-      }
+    if (error) {
+      console.error('Upload failed:', error);
+      alert('Upload failed: ' + error.message);
+      return;
+    }
 
-      if (multiple) {
-        setFiles([...files, urlData.publicUrl]);
-      } else {
-        setFiles([urlData.publicUrl]);
-      }
-    } catch (err) {
-      console.error('Unexpected upload error:', err);
-      alert('Unexpected upload error: ' + (err as Error).message);
-    } finally {
-      setUploading(false);
+    // Get public URL
+    const { data: urlData } = supabase.storage.from('artist').getPublicUrl(storagePath);
+    if (!urlData?.publicUrl) {
+      alert('Could not get public URL for uploaded file.');
+      return;
+    }
+
+    if (multiple) {
+      setFiles([...files, urlData.publicUrl]);
+    } else {
+      setFiles([urlData.publicUrl]);
     }
   };
 
-  const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
 
-    const fileList = Array.from(e.target.files);
-
     if (multiple) {
-      for (const file of fileList) {
-        await handleUpload(file);
-      }
+      Array.from(e.target.files).forEach(file => handleUpload(file));
     } else {
-      await handleUpload(fileList[0]);
+      handleUpload(e.target.files[0]);
     }
   };
 
   return (
     <div className="flex flex-col items-center w-full mt-3">
       <label
-        className={`flex flex-col items-center justify-center w-full h-40
+        className="flex flex-col items-center justify-center w-full h-40
         bg-[#eaeaea] border-2 border-dashed border-[#ccc] rounded-lg cursor-pointer 
-        hover:bg-gray-300 ${uploading ? 'opacity-50 pointer-events-none' : ''}`}
+        hover:bg-gray-300"
       >
         <div className="flex flex-col items-center justify-center text-[#111] pt-4 pb-4">
           <svg

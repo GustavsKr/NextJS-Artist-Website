@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-
+import Navbar from '@/components/Navbar';
 
 
 export default function AdminLoginPage() {
@@ -44,40 +44,52 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center bg-[#eaeaea]">
-      <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
-        <h1 className="text-3xl font-bold mb-6 text-center">Admin Login</h1>
+    <section className='bg-[#111] overflow-x-auto'>
+      <Navbar />
+      <div className="h-screen flex items-center justify-center -mt-20">
+        <div className="bg-[#eaeaea] p-8 rounded-2xl shadow-lg w-full max-w-md">
+          <h1 className="text-3xl font-bold mb-6 text-center">Admin Login</h1>
 
-        <form onSubmit={handleLogin} className="flex flex-col gap-4">
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            className="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            required
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            className="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            required
-          />
-          <button
-            type="submit"
-            className={`bg-indigo-600 text-white p-3 rounded-lg font-semibold transition-all duration-150
-              hover:bg-indigo-700 hover:shadow-lg hover:scale-105
-              ${loading ? 'opacity-70 cursor-not-allowed' : 'cursor-pointer'}`}
-            disabled={loading}
-          >
-            {loading ? 'Logging in...' : 'Login'}
-          </button>
-        </form>
+          <form onSubmit={handleLogin} className="flex flex-col gap-4">
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              className="border rounded-lg p-3 focus:outline-none"
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              className="border rounded-lg p-3 focus:outline-none"
+              required
+            />
+            <button
+              type="submit"
+              className={`
+                inline-block
+                px-6 py-3
+                border
+                text-white
+                bg-[#111]
+                font-semibold
+                transition-all duration-300
+                hover:bg-black hover:text-white
+                hover:shadow-[0_0_15px_rgba(0,0,0,0.4)]
+                select-none
+                ${loading ? 'opacity-70 cursor-not-allowed' : 'cursor-pointer'}`}
+              disabled={loading}
+            >
+              {loading ? 'Logging in...' : 'Login'}
+            </button>
+          </form>
 
-        {error && <p className="text-red-600 mt-4 text-center">{error}</p>}
+          {error && <p className="text-red-600 mt-4 text-center">{error}</p>}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
