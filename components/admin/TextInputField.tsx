@@ -10,7 +10,7 @@ type Props = {
   rowId?: string; // optional, if editing existing row
 };
 
-export default function TextInputDB({ value, setValue, table, field, rowId }: Props) {
+export default function TextInputField({ value, setValue, table, field, rowId }: Props) {
   const [saved, setSaved] = useState(false);
 
   const save = async () => {

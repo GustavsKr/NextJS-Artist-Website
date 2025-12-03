@@ -1,61 +1,138 @@
 'use client';
-import { ChangeEvent } from 'react';
+
+import { ChangeEvent, useState } from 'react';
 import Image from 'next/image';
-import { supabase } from '@/lib/supabaseClient';
+import { createClient } from '@supabase/supabase-js';
+
+// Initialize Supabase client (same as in AdminPanel)
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
 type Props = {
   files: string[];
-  setFiles: (urls: string[]) => void;
-  folder: 'hero' | 'news' | 'about' | 'gallery';
+  setFiles: (urls: string[]) => void | Promise<void>;
+  folder: '/' | 'gallery';
   multiple?: boolean;
+  fixedFilename?: string; // e.g., "hero.jpg"
 };
 
-export default function FileUploadDropzone({ files, setFiles, folder, multiple = false }: Props) {
+export default function FileUploadDropzone({
+  files,
+  setFiles,
+  folder,
+  multiple = false,
+  fixedFilename,
+}: Props) {
+  const [uploading, setUploading] = useState(false);
+
   const handleUpload = async (file: File) => {
-    const fileName = `${folder}-${Date.now()}-${file.name}`;
-    const { error } = await supabase.storage.from('artist').upload(`${folder}/${fileName}`, file);
+    try {
+      setUploading(true);
 
-    if (error) return alert(error.message);
+      let storagePath = '';
 
-    const url = supabase.storage.from('artist').getPublicUrl(`${folder}/${fileName}`).data.publicUrl;
-    if (url) setFiles(multiple ? [...files, url] : [url]);
+      if (folder === '/' && fixedFilename) {
+        // Rename file to fixed filename
+        const base = fixedFilename.replace(/\.jpe?g$/i, '');
+        const newFilename = `${base}.jpg`;
+        const renamedFile = new File([file], newFilename, { type: file.type });
+        file = renamedFile;
+        storagePath = newFilename;
+      } else if (folder === 'gallery') {
+        storagePath = `gallery/${Date.now()}-${file.name}`;
+      } else {
+        storagePath = `${Date.now()}-${file.name}`;
+      }
+
+      // Upload to Supabase Storage
+      const { error } = await supabase.storage
+        .from('artist')
+        .upload(storagePath, file, { upsert: true });
+
+      if (error) {
+        console.error('Upload failed:', error);
+        alert('Upload failed: ' + error.message);
+        return;
+      }
+
+      // Get public URL
+      const { data: urlData } = supabase.storage.from('artist').getPublicUrl(storagePath);
+      if (!urlData?.publicUrl) {
+        alert('Could not get public URL for uploaded file.');
+        return;
+      }
+
+      if (multiple) {
+        setFiles([...files, urlData.publicUrl]);
+      } else {
+        setFiles([urlData.publicUrl]);
+      }
+    } catch (err) {
+      console.error('Unexpected upload error:', err);
+      alert('Unexpected upload error: ' + (err as Error).message);
+    } finally {
+      setUploading(false);
+    }
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
+
+    const fileList = Array.from(e.target.files);
+
     if (multiple) {
-      Array.from(e.target.files).forEach(f => handleUpload(f));
+      for (const file of fileList) {
+        await handleUpload(file);
+      }
     } else {
-      handleUpload(e.target.files[0]);
+      await handleUpload(fileList[0]);
     }
   };
 
   return (
-    <div className="flex items-center justify-center w-full mt-3">
+    <div className="flex flex-col items-center w-full mt-3">
       <label
-        className="flex flex-col items-center justify-center w-full h-64 bg-[#eaeaea] border-2 border-dashed border-[#ccc] rounded-lg cursor-pointer hover:bg-gray-300"
+        className={`flex flex-col items-center justify-center w-full h-40
+        bg-[#eaeaea] border-2 border-dashed border-[#ccc] rounded-lg cursor-pointer 
+        hover:bg-gray-300 ${uploading ? 'opacity-50 pointer-events-none' : ''}`}
       >
-        <div className="flex flex-col items-center justify-center text-[#111] pt-5 pb-6">
-          <svg className="w-8 h-8 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h3a3 3 0 0 0 0-6h-.025a5.56 5.56 0 0 0 .025-.5A5.5 5.5 0 0 0 7.207 9.021C7.137 9.017 7.071 9 7 9a4 4 0 1 0 0 8h2.167M12 19v-9m0 0-2 2m2-2 2 2" />
+        <div className="flex flex-col items-center justify-center text-[#111] pt-4 pb-4">
+          <svg
+            className="w-8 h-8 mb-2"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 17h3a3 3 0 0 0 0-6h-.025a5.56 5.56 0 0 0 .025-.5A5.5 5.5 0 0 0 7.207 9.021C7.137 9.017 7.071 9 7 9a4 4 0 1 0 0 8h2.167M12 19v-9m0 0-2 2m2-2 2 2"
+            />
           </svg>
-          <p className="mb-2 text-sm"><span className="font-semibold">Click to upload</span> or drag and drop</p>
-          <p className="text-xs">.JPG files heavily preferred</p>
+          <p className="text-sm">
+            <span className="font-semibold">Click to upload</span> or drag & drop
+          </p>
+          <p className="text-xs">JPG preferred</p>
         </div>
+
         <input
           type="file"
           multiple={multiple}
           className="hidden"
           onChange={handleChange}
+          accept="image/*"
         />
       </label>
 
-      {/* Show previews */}
       {files.length > 0 && (
         <div className="grid grid-cols-3 gap-3 mt-3 w-full">
           {files.map((url, i) => (
             <div key={i} className="relative w-full h-24 rounded overflow-hidden">
-              <Image src={url} alt={folder} fill className="object-cover" />
+              <Image src={url} alt={`upload-preview-${i}`} fill className="object-cover" />
             </div>
           ))}
         </div>
