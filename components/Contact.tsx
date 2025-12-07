@@ -2,7 +2,7 @@
 
 export default function Contact() {
   return (
-    <section className="relative w-full bg-[#eaeaea] text-black py-20 scroll-mt-40">
+    <section className="relative w-full bg-[#111] text-white pb-20">
 
       <div className="max-w-3xl mx-auto px-6 text-center">
         <h2 className="text-3xl font-bold mb-6">Contact</h2>
