@@ -11,7 +11,7 @@ interface Photo {
 
 export default function GalleryClient({ photos }: { photos: Photo[] }) {
   return (
-    <section className="w-full bg-[#111] text-white">
+    <section>
       <Navbar />
       {/* Masonry container */}
       <div

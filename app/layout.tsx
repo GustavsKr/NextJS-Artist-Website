@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Roboto_Slab } from "next/font/google";
 import "./globals.css";
-import Footer from "@/components/Footer";
 
 const montserrat = Roboto_Slab({
   subsets: ["latin"],
@@ -29,10 +28,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="overflow-x-hidden">
-      <body className={montserrat.className}>
+    <html lang="en">
+      <body className={`${montserrat.className} overflow-x-hidden`}>
         {children}
-        <Footer />
       </body>
     </html>
   );

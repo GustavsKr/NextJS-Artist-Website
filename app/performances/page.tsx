@@ -1,5 +1,6 @@
 // app/performances/page.tsx
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { createClient } from "@supabase/supabase-js";
 
 export const metadata = {
@@ -65,6 +66,7 @@ export default async function PerformancesPage() {
         </div>
 
       </div>
+      <Footer />
     </main>
   );
 }

@@ -10,6 +10,7 @@ export async function GET() {
     { path: "/about", priority: 1.0 },
     { path: "/gallery", priority: 0.8 },
     { path: "/performances", priority: 0.8 },
+    { path: "/etudes", priority: 0.8 },
   ];
 
   // generate XML

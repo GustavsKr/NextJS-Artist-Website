@@ -1,6 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { unstable_cache } from "next/cache";
 import GalleryClient from "./GalleryClient";
+import Footer from "@/components/Footer";
 
 const getGalleryFiles = unstable_cache(
   async () => {
@@ -35,5 +36,10 @@ const getGalleryFiles = unstable_cache(
 export default async function GalleryServer() {
   const photos = await getGalleryFiles();
 
-  return <GalleryClient photos={photos} />;
+  return (
+    <main className="w-full bg-[#111] text-white">
+      <GalleryClient photos={photos} />
+      <Footer />
+    </main>
+  );
 }

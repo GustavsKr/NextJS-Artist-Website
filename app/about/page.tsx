@@ -3,6 +3,7 @@
 export const revalidate = 600; // cache page for 10 minutes
 
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import Image from "next/image";
 import { createClient } from "@supabase/supabase-js";
 
@@ -39,17 +40,16 @@ export default async function AboutPage() {
   }
 
   return (
-    <main className="w-full bg-[#111] text-white">
+    <main className="w-full h-screen overflow-hidden bg-[#111] text-white min-h-screen">
       <Navbar />
 
-      <section className="max-w-6xl mx-auto flex flex-col lg:flex-row items-start gap-10 py-24 px-6">
-        <div className="w-full lg:w-1/2 order-2 lg:order-1">
+      <section className="max-w-6xl mx-auto flex flex-col lg:flex-row items-start gap-10 py-20 px-6">
+        <div className=" lg:w-1/2 order-2 lg:order-1">
           <Image
             src="/biography.jpg"
             alt="Elzana Sharipova"
             width={1600}
             height={2400}
-            className="w-full h-auto object-cover shadow-lg"
           />
         </div>
 
@@ -60,6 +60,7 @@ export default async function AboutPage() {
             : <p>Loading biography...</p>}
         </div>
       </section>
+      <Footer />
     </main>
   );
 }
