@@ -24,7 +24,7 @@ export default function Home() {
 
         {/* Bottom centered clickable box */}
         <Link
-          href="/compositions"
+          href="/etudes"
           className="absolute bottom-0 bg-black text-white px-6 py-3 text-lg tracking-wide z-30 animate-fadeIn from-black"
         >
           ETUDES BY ELZANA

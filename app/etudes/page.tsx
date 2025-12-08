@@ -4,11 +4,6 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
-export const metadata = {
-  title: "ETUDES BY ELZANA",
-  description: "Newest release of pianist and composer Elzana Sharipova",
-};
-
 export default function Compositions() {
   return (
     <main className="relative w-full min-h-screen bg-black overflow-hidden text-white">
@@ -42,7 +37,7 @@ export default function Compositions() {
       <motion.div
         initial={{ opacity: 0, scale: 1.1 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.4, ease: "easeOut" }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
         className="absolute inset-0 w-full h-full overflow-hidden"
       >
         <Image
@@ -111,7 +106,7 @@ export default function Compositions() {
           target="_blank"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1 }}
+          transition={{ duration: 1, delay: 0.8 }}
           className="
             relative mt-10 px-10 py-4 text-lg font-semibold border border-white 
             rounded-full overflow-hidden
