@@ -7,6 +7,9 @@ export const metadata = {
   description: "Collection of video performances by pianist and composer Elzana Sharipova",
 };
 
+// Cache this page for 10 minutes
+export const revalidate = 600;
+
 // Convert YouTube URL → embed URL
 function toEmbedUrl(url: string): string {
   try {
@@ -14,7 +17,6 @@ function toEmbedUrl(url: string): string {
     const v = parsed.searchParams.get("v");
     if (v) return `https://www.youtube.com/embed/${v}`;
 
-    // youtu.be format
     const lastPart = parsed.pathname.split("/").pop();
     return `https://www.youtube.com/embed/${lastPart}`;
   } catch {
@@ -25,7 +27,8 @@ function toEmbedUrl(url: string): string {
 export default async function PerformancesPage() {
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    { auth: { persistSession: false } }
   );
 
   const { data: performances, error } = await supabase
@@ -43,12 +46,9 @@ export default async function PerformancesPage() {
       <Navbar />
       <div className="max-w-6xl mx-auto pb-12 py-24">
 
-        {/* Single column on mobile + medium, two columns on large screens */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24">
           {performances?.map((item) => (
             <div key={item.id}>
-
-              {/* Slightly bigger video by increasing height */}
               <div className="bg-black aspect-16/8">
                 <iframe
                   src={toEmbedUrl(item.links)}
@@ -57,7 +57,6 @@ export default async function PerformancesPage() {
                 ></iframe>
               </div>
 
-              {/* Hide title if null/empty */}
               {item.title && item.title.trim() !== "" && (
                 <p className="mt-2 text-center text-sm">{item.title}</p>
               )}

@@ -1,5 +1,7 @@
 // app/about/page.tsx
 
+export const revalidate = 600; // cache page for 10 minutes
+
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
 import { createClient } from "@supabase/supabase-js";
@@ -9,10 +11,9 @@ export const metadata = {
   description: "Biography and background of pianist and composer Elzana Sharipova",
 };
 
-// Helper to convert DB multiline text → <p> blocks
 function formatParagraphs(text: string) {
   return text
-    .split(/\n+/) // split on blank lines
+    .split(/\n+/)
     .map((p, i) => (
       <p key={i} className="mb-4 leading-relaxed whitespace-pre-wrap">
         {p.trim()}
@@ -23,10 +24,10 @@ function formatParagraphs(text: string) {
 export default async function AboutPage() {
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    { auth: { persistSession: false } }
   );
 
-  // Grab the single row
   const { data, error } = await supabase
     .from("about")
     .select("content")
@@ -42,8 +43,6 @@ export default async function AboutPage() {
       <Navbar />
 
       <section className="max-w-6xl mx-auto flex flex-col lg:flex-row items-start gap-10 py-24 px-6">
-
-        {/* Left: Biography image */}
         <div className="w-full lg:w-1/2 order-2 lg:order-1">
           <Image
             src="/biography.jpg"
@@ -54,15 +53,12 @@ export default async function AboutPage() {
           />
         </div>
 
-        {/* Right: Text content */}
         <div className="flex-1 space-y-6 order-1 lg:order-2">
           <h1 className="text-4xl font-bold mb-4">Biography</h1>
-
           {data?.content
             ? formatParagraphs(data.content)
             : <p>Loading biography...</p>}
         </div>
-
       </section>
     </main>
   );

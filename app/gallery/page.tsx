@@ -1,28 +1,39 @@
-// app/gallery/page.tsx
-import fs from "fs";
-import path from "path";
+import { createClient } from "@supabase/supabase-js";
+import { unstable_cache } from "next/cache";
 import GalleryClient from "./GalleryClient";
 
-export const metadata = {
-  title: "Gallery - Elzana Sharipova",
-  description: "Photo gallery of pianist and composer Elzana Sharipova",
-};
+const getGalleryFiles = unstable_cache(
+  async () => {
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!,
+      { auth: { persistSession: false } }
+    );
 
-export default function GalleryServer() {
-  const galleryDir = path.join(process.cwd(), "public/gallery");
-  let files = fs.readdirSync(galleryDir);
+    // Get only files in /gallery
+    const { data: files, error } = await supabase.storage
+      .from("main")
+      .list("gallery", { limit: 500 });
 
-  // Filter out hidden files like .DS_Store
-  files = files.filter((file) => !file.startsWith("."));
+    if (error || !files) return [];
 
-  const photos = files.map((file) => ({
-    src: `/gallery/${file}`,
-    alt: file,
-  }));
+    return files.map((file) => {
+      const { data } = supabase.storage
+        .from("main")
+        .getPublicUrl(`gallery/${file.name}`);
 
-  return (
-    <>
-      <GalleryClient photos={photos} />
-    </>
-  );
+      return {
+        src: data.publicUrl,
+        alt: file.name,
+      };
+    });
+  },
+  ["gallery-cache"],        // cache key
+  { revalidate: 7200 }      // cache for 2 hour so supabase free tier doesnt end
+);
+
+export default async function GalleryServer() {
+  const photos = await getGalleryFiles();
+
+  return <GalleryClient photos={photos} />;
 }
