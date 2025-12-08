@@ -12,6 +12,7 @@ export default function Navbar() {
     { label: "About", href: "/about" },
     { label: "Performances", href: "/performances" },
     { label: "Gallery", href: "/gallery" },
+    { label: "Contact", href: "/contact" },
   ];
 
   // Lock scroll when menu is open
