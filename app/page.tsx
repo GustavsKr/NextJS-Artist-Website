@@ -17,7 +17,6 @@ export default function Home() {
           src="/hero2.jpg"
           alt="Elzana Sharipova"
           fill
-          quality={100}
           className="object-cover md:object-cover animate-fadeIn"
           priority
         />

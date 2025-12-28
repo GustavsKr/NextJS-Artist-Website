@@ -16,7 +16,13 @@ const getGalleryFiles = unstable_cache(
       .from("main")
       .list("gallery", { limit: 500 });
 
-    if (error || !files) return [];
+    if (error) {
+      console.error("Supabase gallery error:", error);
+      throw new Error("Failed to fetch gallery");
+    }
+
+    if (!files) return [];
+
 
     return files.map((file) => {
       const { data } = supabase.storage
@@ -30,7 +36,7 @@ const getGalleryFiles = unstable_cache(
     });
   },
   ["gallery-cache"],        // cache key
-  { revalidate: 7200 }      // cache for 2 hour so supabase free tier doesnt end
+  { revalidate: 3600 }      // cache for 1 hour so supabase free tier doesnt end
 );
 
 export default async function GalleryServer() {
