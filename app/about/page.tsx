@@ -1,22 +1,25 @@
 // app/about/page.tsx
 
-export const revalidate = 600; // cache page for 10 minutes
+export const revalidate = 600;
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import Image from "next/image";
 import { createClient } from "@supabase/supabase-js";
 
 export const metadata = {
   title: "About - Elzana Sharipova",
-  description: "Biography and background of pianist and composer Elzana Sharipova",
+  description:
+    "Biography and background of pianist and composer Elzana Sharipova",
 };
 
 function formatParagraphs(text: string) {
   return text
     .split(/\n+/)
     .map((p, i) => (
-      <p key={i} className="mb-4 leading-relaxed whitespace-pre-wrap">
+      <p
+        key={i}
+        className="text-lg leading-relaxed text-white/80 mb-6"
+      >
         {p.trim()}
       </p>
     ));
@@ -40,27 +43,21 @@ export default async function AboutPage() {
   }
 
   return (
-    <main className="w-full h-screen overflow-hidden bg-[#111] text-white min-h-screen">
+    <main className="min-h-screen flex flex-col bg-[#111] text-white">
       <Navbar />
 
-      <section className="max-w-6xl mx-auto flex flex-col lg:flex-row items-start gap-10 py-20 px-6">
-        <div className=" lg:w-1/2 order-2 lg:order-1">
-          <Image
-            src="/biography.jpg"
-            alt="Elzana Sharipova"
-            width={1600}
-            height={2400}
-          />
-        </div>
+      <section className="grow max-w-3xl mx-auto px-6 py-12">
+        {/* Elegant divider */}
+        <div className="w-24 h-0.5 bg-white/20 mx-auto mb-12" />
 
-        <div className="flex-1 space-y-6 order-1 lg:order-2">
-          <h1 className="text-4xl font-bold mb-4">Biography</h1>
-          {data?.content
-            ? formatParagraphs(data.content)
-            : <p>Loading biography...</p>}
-        </div>
+        {/* Biography content */}
+        <article className="prose prose-invert prose-lg max-w-none">
+          {data?.content && formatParagraphs(data.content)}
+        </article>
       </section>
+
       <Footer />
     </main>
   );
+
 }
