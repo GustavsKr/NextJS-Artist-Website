@@ -14,7 +14,7 @@ export default function Home() {
 
         {/* Hero image */}
         <Image
-          src="/hero2.jpg"
+          src="/biography.jpg"
           alt="Elzana Sharipova"
           fill
           className="object-cover md:object-cover animate-fadeIn"
