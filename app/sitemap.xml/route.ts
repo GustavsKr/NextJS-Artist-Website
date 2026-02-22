@@ -2,7 +2,7 @@
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const baseUrl = "https://elzanasharipova.com";
+  const baseUrl = "https://elzanasaripova.com";
 
   // list all static pages
   const urls = [

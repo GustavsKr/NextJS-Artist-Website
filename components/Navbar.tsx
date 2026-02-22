@@ -78,8 +78,8 @@ export default function Navbar() {
             href="/"
             className="text-2xl pt-0 sm:text-3xl md:text-4xl xl:text-3xl font-semibold tracking-widest text-center"
           >
-            <span className="block sm:inline">ELZANA </span>
-            <span className="block sm:inline">SHARIPOVA</span>
+            <span className="block sm:inline">EĻZANA </span>
+            <span className="block sm:inline">ŠARIPOVA</span>
           </Link>
 
           {/* Mobile/Tablet social icons */}

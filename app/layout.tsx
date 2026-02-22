@@ -8,16 +8,16 @@ const montserrat = Roboto_Slab({
 });
 
 export const metadata: Metadata = {
-  title: "Elzana Sharipova",
-  description: "Official artist website of Elzana Sharipova",
-  keywords: ["Elzana Sharipova", "Eļzana Šaripova", "Эльзана Шарипова", "Portfolio", "Pianist", "Composer", "Artist", "Music"],
-  authors: [{ name: "Elzana Sharipova" }],
-  creator: "Elzana Sharipova",
+  title: "Eļzana Šaripova",
+  description: "Official artist website of Eļzana Šaripova",
+  keywords: ["Eļzana Šaripova", "Eļzana Šaripova", "Эльзана Шарипова", "Portfolio", "Pianist", "Composer", "Artist", "Music"],
+  authors: [{ name: "Eļzana Šaripova" }],
+  creator: "Eļzana Šaripova",
   openGraph: {
-    title: "Elzana Sharipova",
-    description: "Official artist website of Elzana Sharipova",
-    url: "https://elzanasharipova.com",
-    siteName: "Elzana Sharipova",
+    title: "Eļzana Šaripova",
+    description: "Official artist website of Eļzana Šaripova",
+    url: "https://elzanasaripova.com",
+    siteName: "Eļzana Šaripova",
     type: "website",
   },
   robots: {

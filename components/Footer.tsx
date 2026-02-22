@@ -7,7 +7,7 @@ export default function Footer() {
       
       {/* Copyright */}
       <div>
-        © {new Date().getFullYear()} Elzana Sharipova - All Rights Reserved
+        © {new Date().getFullYear()} Eļzana Šaripova - All Rights Reserved
       </div>
 
     </footer>

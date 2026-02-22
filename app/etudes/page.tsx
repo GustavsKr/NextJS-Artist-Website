@@ -72,7 +72,7 @@ export default function Compositions() {
 
           <Image
             src="/album.jpg"
-            alt="Etudes by Elzana"
+            alt="Etudes by Eļzana"
             width={420}
             height={420}
             className="relative z-10 shadow-2xl rounded-xl object-cover"

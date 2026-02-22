@@ -7,9 +7,9 @@ import Footer from "@/components/Footer";
 import { createClient } from "@supabase/supabase-js";
 
 export const metadata = {
-  title: "About - Elzana Sharipova",
+  title: "About - Eļzana Šaripova",
   description:
-    "Biography and background of pianist and composer Elzana Sharipova",
+    "Biography and background of pianist and composer Eļzana Šaripova",
 };
 
 function formatParagraphs(text: string) {

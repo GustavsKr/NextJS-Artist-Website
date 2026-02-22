@@ -4,8 +4,8 @@ import Footer from "@/components/Footer";
 import { createClient } from "@supabase/supabase-js";
 
 export const metadata = {
-  title: "Performances - Elzana Sharipova",
-  description: "Collection of video performances by pianist and composer Elzana Sharipova",
+  title: "Performances - Eļzana Šaripova",
+  description: "Collection of video performances by pianist and composer Eļzana Šaripova",
 };
 
 // Cache this page for 10 minutes
