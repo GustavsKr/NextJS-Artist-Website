@@ -34,7 +34,7 @@ export default async function AboutPage() {
 
   const { data, error } = await supabase
     .from("about")
-    .select("content")
+    .select("content_eng, content_lv")
     .eq("id", 1)
     .single();
 
@@ -47,17 +47,24 @@ export default async function AboutPage() {
       <Navbar />
 
       <section className="grow max-w-3xl mx-auto px-6 py-12">
-        {/* Elegant divider */}
+        {/* Top divider */}
         <div className="w-24 h-0.5 bg-white/20 mx-auto mb-12" />
 
-        {/* Biography content */}
         <article className="prose prose-invert prose-lg max-w-none">
-          {data?.content && formatParagraphs(data.content)}
+          {/* English content (always shown) */}
+          {data?.content_eng && formatParagraphs(data.content_eng)}
+
+          {/* Latvian content (optional) */}
+          {data?.content_lv && (
+            <>
+              <div className="w-24 h-0.5 bg-white/20 mx-auto my-12" />
+              {formatParagraphs(data.content_lv)}
+            </>
+          )}
         </article>
       </section>
 
       <Footer />
     </main>
   );
-
 }
