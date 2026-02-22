@@ -9,7 +9,7 @@ import { createClient } from "@supabase/supabase-js";
 export const metadata = {
   title: "About - Eļzana Šaripova",
   description:
-    "Biography and background of pianist and composer Eļzana Šaripova",
+    "Biography and background of pianist and composer Elzana Sharipova",
 };
 
 function formatParagraphs(text: string) {
@@ -42,25 +42,27 @@ export default async function AboutPage() {
     console.error("Error loading about:", error);
   }
 
+  const hasEng = !!data?.content_eng;
+  const hasLv = !!data?.content_lv;
+
   return (
     <main className="min-h-screen flex flex-col bg-[#111] text-white">
       <Navbar />
 
       <section className="grow max-w-3xl mx-auto px-6 py-12">
-        {/* Top divider */}
         <div className="w-24 h-0.5 bg-white/20 mx-auto mb-12" />
 
         <article className="prose prose-invert prose-lg max-w-none">
-          {/* English content (always shown) */}
-          {data?.content_eng && formatParagraphs(data.content_eng)}
+          {/* English */}
+          {hasEng && formatParagraphs(data.content_eng)}
 
-          {/* Latvian content (optional) */}
-          {data?.content_lv && (
-            <>
-              <div className="w-24 h-0.5 bg-white/20 mx-auto my-12" />
-              {formatParagraphs(data.content_lv)}
-            </>
+          {/* Divider only if both exist */}
+          {hasEng && hasLv && (
+            <div className="w-24 h-0.5 bg-white/20 mx-auto my-12" />
           )}
+
+          {/* Latvian */}
+          {hasLv && formatParagraphs(data.content_lv)}
         </article>
       </section>
 
