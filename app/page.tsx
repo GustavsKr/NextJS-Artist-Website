@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="w-full overflow-x-hidden">
-      <section className="relative w-full h-screen bg-black">
+      <section className="relative w-full min-h-screen bg-black">
         {/* Gradient + Navbar wrapper */}
         <div className="absolute top-0 left-0 w-full z-20 opacity-0 animate-fadeIn delay-500">
           <div className="absolute top-0 left-0 w-full h-60 bg-linear-to-b from-black/90 to-transparent"></div>
