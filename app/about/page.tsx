@@ -52,7 +52,7 @@ export default async function AboutPage() {
       <section className="grow max-w-3xl mx-auto px-6 py-12">
         <div className="w-24 h-0.5 bg-white/20 mx-auto mb-12" />
 
-        <article className="prose prose-invert prose-lg max-w-none">
+        <article className="prose prose-invert prose-lg max-w-none text-center">
           {/* English */}
           {hasEng && formatParagraphs(data.content_eng)}
 
