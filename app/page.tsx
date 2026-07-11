@@ -14,19 +14,20 @@ export default function Home() {
 
         {/* Hero image */}
         <Image
-          src="/hero.jpg"
+          src="/elzana6.jpeg"
           alt="Eļzana Šaripova"
-          fill
-          className="object-cover md:object-cover animate-fadeIn"
+          fill 
           priority
-        />
+          unoptimized
+          className="object-cover object-[75%_center] md:object-center animate-fadeIn"
+        /> 
 
         {/* Bottom centered clickable box */}
         <Link
           href="/etudes"
-          className="absolute bottom-0 bg-black text-white px-6 py-3 text-lg tracking-wide z-30 animate-fadeIn from-black"
+          className="absolute bottom-0 bg-black text-white px-6 py-3 text-lg tracking-wide z-30 animate-fadeIn from-black italic"
         >
-          ETUDES BY ELZANA
+          ETUDES   |   LISTEN NOW
         </Link>
       </section>
     </main>

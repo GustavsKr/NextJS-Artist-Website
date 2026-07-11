@@ -33,7 +33,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="w-full text-white z-40 px-6 sm:px-12 md:pt-5 xl:pt-1">
+    <nav className="w-full text-white z-40 px-6 sm:px-12 md:pt-5 xl:pt-1 italic">
       <div className="flex items-center justify-between py-10 relative">
         {/* LEFT: Hamburger / Desktop Nav */}
         <div className="flex items-center gap-6 xl:gap-10">

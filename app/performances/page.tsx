@@ -13,8 +13,8 @@ export const revalidate = 600;
 
 // Convert YouTube URL → embed URL
 function toEmbedUrl(url: string): string {
-  try {
-    const parsed = new URL(url);
+try {
+  const parsed = new URL(url);
     const v = parsed.searchParams.get("v");
     if (v) return `https://www.youtube.com/embed/${v}`;
 
