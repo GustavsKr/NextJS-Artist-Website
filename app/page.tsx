@@ -14,7 +14,7 @@ export default function Home() {
 
         {/* Hero image */}
         <Image
-          src="/elzana6.jpeg"
+          src="/elzana6.JPEG"
           alt="Eļzana Šaripova"
           fill 
           priority
