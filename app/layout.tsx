@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Eļzana Šaripova",
     description: "Official artist website of Eļzana Šaripova",
-    url: "https://elzanasaripova.com",
+    url: "https://elzanasharipova.com",
     siteName: "Eļzana Šaripova",
     type: "website",
   },

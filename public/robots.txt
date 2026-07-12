@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: /contact
 
-Sitemap: https://elzanasaripova.com/sitemap.xml
+Sitemap: https://elzanasharipova.com/sitemap.xml
