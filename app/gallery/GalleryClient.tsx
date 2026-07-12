@@ -37,6 +37,7 @@ export default function GalleryClient({ photos }: { photos: Photo[] }) {
               alt={photo.alt}
               width={800}
               height={1200}
+              quality={95}
               className="w-full h-auto object-cover"
             />
           </motion.div>

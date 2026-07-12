@@ -18,7 +18,7 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="w-full min-h-screen bg-[#111] text-white flex flex-col">
+    <main className="w-full min-h-screen bg-[#0a0a0a] text-white flex flex-col">
       <Navbar />
 
       <section className="flex-1 flex items-center justify-center px-6 text-center">

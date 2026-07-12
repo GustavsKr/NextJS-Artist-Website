@@ -43,7 +43,7 @@ export default async function PerformancesPage() {
   }
 
   return (
-    <main className="w-full bg-[#111] text-white min-h-screen">
+    <main className="w-full bg-[#0a0a0a] text-white min-h-screen">
       <Navbar />
       <div className="max-w-6xl mx-auto pb-12 py-24">
 

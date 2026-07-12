@@ -43,7 +43,7 @@ export default async function GalleryServer() {
   const photos = await getGalleryFiles();
 
   return (
-    <main className="w-full bg-[#111] text-white">
+    <main className="w-full bg-[#0a0a0a] text-white">
       <GalleryClient photos={photos} />
       <Footer />
     </main>

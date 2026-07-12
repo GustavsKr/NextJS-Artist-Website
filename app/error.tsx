@@ -10,7 +10,7 @@ export default function Error({ error }: { error: Error }) {
   }, [error]);
 
   return (
-    <main className="w-full min-h-screen flex flex-col bg-[#111] text-white">
+    <main className="w-full min-h-screen flex flex-col bg-[#0a0a0a] text-white">
       <Navbar />
       <section className="flex flex-col items-center justify-center flex-1 text-center p-4">
         <h1 className="text-[5rem] font-bold mb-4">Something went wrong</h1>
