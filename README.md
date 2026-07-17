@@ -2,7 +2,7 @@
 
 This is a portfolio website built for a local pianist and composer to showcase her music, biography, and performances. 
 
-The live site is hosted at: **[elzanasharipova.com](elzanasharipova.com)**
+The live site is hosted at: **[elzanasharipova.com](https://elzanasharipova.com)**
 
 ---
 
