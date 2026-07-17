@@ -25,13 +25,22 @@ Normally for a portfolio website, I would use tools like wordpress or sqarespace
 
 ---
 
+### Potential improvements
+
+* Updated contact page with perhaps an email form
+* Higher quality main hero image (Artist needs to organise a photo session with 16:9 aspect ratio photos for clean desktop visibility)
+* Section where the artist can sell sheet music pdf files (Not necessary/requested yet)
+* External link tree where artist can compile all of their social media and music platform links (Not all music platforms are currently showcased, also would take less space)
+
+---
+
 This project was built using `pnpm`, but you can use `npm` or `yarn` if you prefer. 
 
 To run this project locally, clone the repository and install the dependencies:
 
 ```bash
 # Clone the repository
-git clone [https://github.com/GustavsKr/NextJS-Artist-Website.git](https://github.com/GustavsKr/NextJS-Artist-Website.git)
+git clone https://github.com/GustavsKr/NextJS-Artist-Website.git
 
 # Install dependencies (pnpm preferred, npm should work too)
 pnpm install
