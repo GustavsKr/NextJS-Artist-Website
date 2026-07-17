@@ -1,4 +1,4 @@
-# 🎹 Portfolio Website: Pianist & Composer
+# 🎹 Musician Portfolio Website
 
 This is a portfolio website built for a local pianist and composer to showcase her music, biography, and performances. 
 
