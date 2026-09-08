@@ -14,12 +14,12 @@ export default function Home() {
 
         {/* Hero image */}
         <Image
-          src="/elzana6.JPEG"
+          src="/hero.JPEG"
           alt="Eļzana Šaripova"
           fill 
           priority
           unoptimized
-          className="object-cover object-[75%_center] md:object-center"
+          className="object-cover object-[30%_center] md:object-[30%_center]"
         /> 
 
         {/* Bottom centered clickable box */}
